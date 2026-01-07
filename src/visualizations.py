@@ -1,6 +1,20 @@
-# visualizations.py
-# High-quality visuals saved as PNGs (no GUI popups)
-# ---------------------------------------------------
+"""
+Visualizations Module
+=====================
+Generates high-quality visualizations for exploratory data analysis.
+
+This module creates professional-quality plots for:
+- Transaction amount distributions
+- Fraud vs non-fraud comparisons
+- Feature correlations
+- Class balance analysis
+- Key feature distributions
+
+All visualizations are saved as high-resolution PNG files (300 DPI).
+
+Author: Your Name
+Date: 2024
+"""
 
 import os
 import matplotlib
@@ -9,7 +23,15 @@ matplotlib.use("Agg")  # Disable GUI backend (prevents freezing)
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import logging
 
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# Set seaborn style for professional appearance
+sns.set_style("whitegrid")
+sns.set_palette("husl")
 
 # Create "outputs" folder if not exists
 if not os.path.exists("outputs"):
@@ -116,10 +138,55 @@ def pairplot_features(df):
 # Run all visuals (you call this from main.py)
 # ---------------------------------------------------
 def generate_all_visuals(df):
-    print("Generating visuals…")
-    plot_transaction_distribution(df)
-    fraud_density_plot(df)
-    correlation_heatmap(df)
-    plot_class_balance(df)
-    boxplot_key_features(df)
-    print("All visuals saved in /outputs folder ✓")
+    """
+    Generate all visualization plots for the dataset.
+    
+    Creates 5 comprehensive visualizations:
+    1. Transaction amount distribution (histogram with KDE)
+    2. Fraud vs non-fraud density comparison
+    3. Complete feature correlation heatmap
+    4. Class balance bar chart
+    5. Key features boxplots by class
+    
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Credit card transaction DataFrame
+    
+    Returns
+    -------
+    None
+        All plots are saved to the 'outputs/' directory
+    
+    Examples
+    --------
+    >>> df = load_data()
+    >>> generate_all_visuals(df)
+    """
+    try:
+        logger.info("="*60)
+        logger.info("GENERATING VISUALIZATIONS")
+        logger.info("="*60)
+        
+        logger.info("1/5: Transaction amount distribution...")
+        plot_transaction_distribution(df)
+        
+        logger.info("2/5: Fraud density plot...")
+        fraud_density_plot(df)
+        
+        logger.info("3/5: Correlation heatmap...")
+        correlation_heatmap(df)
+        
+        logger.info("4/5: Class balance plot...")
+        plot_class_balance(df)
+        
+        logger.info("5/5: Key features boxplots...")
+        boxplot_key_features(df)
+        
+        logger.info("="*60)
+        logger.info("✓ All visualizations saved in /outputs folder")
+        logger.info("="*60)
+    
+    except Exception as e:
+        logger.error(f"Error generating visualizations: {e}")
+        raise
