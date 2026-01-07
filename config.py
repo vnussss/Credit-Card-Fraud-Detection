@@ -9,7 +9,7 @@ This module contains all configurable parameters including:
 - Preprocessing settings
 - Visualization settings
 
-Author: Your Name
+Author: Venus
 Date: 2024
 """
 
