@@ -15,10 +15,10 @@ This script orchestrates the complete machine learning pipeline:
 Usage:
     python main.py
 
-Author: Your Name
+Author: Venus
 Project: Credit Card Fraud Detection
 Date: 2024
-Internship: [Company Name]
+Internship: Genz Educatewing
 """
 
 import sys
